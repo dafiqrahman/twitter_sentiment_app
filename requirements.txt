@@ -6,3 +6,4 @@ wordcloud
 transformers
 sentence-transformers
 bertopic
+snscrape
