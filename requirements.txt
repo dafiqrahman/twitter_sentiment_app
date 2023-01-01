@@ -1,0 +1,8 @@
+pandas
+numpy
+matplotlib
+plotly
+wordcloud
+transformers
+sentence-transformers
+bertopic
