@@ -1,14 +1,15 @@
 import streamlit as st 
 import pandas as pd
-import functions as fn
+import script.functions as fn
 import plotly.express as px
 import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
 # import text_proc in script folder
-import text_proc as tp
+import script.text_proc as tp
 
 # Load data
-st.title('Twitter Sentiment Analysis App')
+# add tiwtter logo inside title 
+st.markdown("<h1 style='text-align: center; color: black;'>🗨️Twitter Sentiment Analysis App</h1>", unsafe_allow_html=True)
 st.write("Aplikasi sederhana untuk melakukan analisis sentimen terhadap tweet yang diinputkan dan mengekstrak topik dari setiap sentimen")
 
 # streamlit selectbox simple and advanced
@@ -32,25 +33,28 @@ else :
         length = st.number_input("Jumlah Tweet", 10, 500, 100)
     st.caption("anda bisa menggunakan parameter pencarian yang lebih spesifik, parameter ini sama dengan paremeter pencarian di twitter")
 
-submit = st.button("Kirim")
+submit = st.button("🔍Cari Tweet")
 
 st.caption("semakin banyak tweet yang diambil maka semakin lama proses analisis sentimen")
 
 if submit:
-    with st.spinner('Mengambil data dari twitter...'):
+    with st.spinner('Mengambil data dari twitter... (1/2)'):
         df = fn.get_tweets(input, length, option)
-    with st.spinner('Melakukan Prediksi Sentimen...'):
+    with st.spinner('Melakukan Prediksi Sentimen... (2/2)'):
         df = fn.get_sentiment(df)
-        df.to_csv('data.csv',index=False)
+        df.to_csv('assets/data.csv',index=False)
     # plot
     st.write("<b>Preview Dataset</b>",unsafe_allow_html=True)
     st.dataframe(df,use_container_width=True,height = 200)
     st.write ("Jumlah Tweet: ",df.shape[0])
-    st.write("<h3>Analisis Sentimen</h3>",unsafe_allow_html=True)
+    # download datasets 
+    
+
+    st.write("<h3>📊 Analisis Sentimen</h3>",unsafe_allow_html=True)
     col_fig1, col_fig2 = st.columns([4,3])
     with col_fig1:
          with st.spinner('Sedang Membuat Grafik...'):
-            st.write("<b>Wordcloud Tiap Sentiment</b>",unsafe_allow_html=True)
+            st.write("<b>Jumlah Tweet Tiap Sentiment</b>",unsafe_allow_html=True)
             fig_1 = fn.get_bar_chart(df)
             st.plotly_chart(fig_1,use_container_width=True,theme="streamlit")
     with col_fig2:
@@ -74,7 +78,7 @@ if submit:
             plt.imshow(wordcloud_net, interpolation="bilinear")
             plt.axis("off")
             st.pyplot(fig)
-    st.write("<h3>Sentiment Clustering</h3>",unsafe_allow_html=True)
+    st.write("<h3>✨ Sentiment Clustering</h3>",unsafe_allow_html=True)
     @st.experimental_singleton
     def load_sentence_model():
         embedding_model = SentenceTransformer("sentence_bert")
@@ -82,32 +86,32 @@ if submit:
     embedding_model = load_sentence_model()
     tab4,tab5,tab6 = st.tabs(["Negatif","Netral","Positif"])
     with tab4:
-        if len(df[df["sentiment"]=="negatif"]) < 4:
+        if len(df[df["sentiment"]=="negatif"]) < 5:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
         else:
             with st.spinner('Sedang Membuat Grafik...'):
                 text,data,fig = tp.plot_text(df,"negatif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-        fig,topic_modelling = tp.topic_modelling(text,data)
-        st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+            fig,topic_modelling = tp.topic_modelling(text,data)
+            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
     with tab5:
-        if len(df[df["sentiment"]=="netral"]) < 4:
+        if len(df[df["sentiment"]=="netral"]) < 5:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
         else:
             with st.spinner('Sedang Membuat Grafik...'):
                 text,data,fig = tp.plot_text(df,"netral",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-        fig,topic_modelling = tp.topic_modelling(text,data)
-        st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+            fig,topic_modelling = tp.topic_modelling(text,data)
+            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
     with tab6:
-        if len(df[df["sentiment"]=="positif"]) < 4:
+        if len(df[df["sentiment"]=="positif"]) < 5:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
         else:
             with st.spinner('Sedang Membuat Grafik...'):
                 text,data,fig = tp.plot_text(df,"positif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-        fig,topic_modelling = tp.topic_modelling(text,data)
-        st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+            fig,topic_modelling = tp.topic_modelling(text,data)
+            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
     
             
     

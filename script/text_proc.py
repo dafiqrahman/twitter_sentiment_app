@@ -13,7 +13,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 # import word_tokenize from NLTK
 from transformers import AutoTokenizer
-from plotting import visualize_barchart
+from script.plotting import visualize_barchart
 
 def load_stopwords():
     stopwords = pd.read_csv("assets/stopwordbahasa.csv", header=None)
@@ -35,7 +35,7 @@ def get_wordcloud(df,kelas_sentiment):
     tokens = tokens.apply(lambda x: ' '.join(x))
     text = ' '.join(tokens)
     wordcloud = WordCloud(width = 800, height = 800,
-                    background_color ='#ebeae8',
+                    background_color ='black',
                     min_font_size = 10,
                     colormap = cmap_dict[kelas_sentiment]).generate(text)
     return wordcloud

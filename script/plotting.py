@@ -11,7 +11,7 @@ def visualize_barchart(topic_model,
                        top_n_topics: int = 8,
                        n_words: int = 5,
                        custom_labels: bool = False,
-                       title: str = "Topic Word Scores",
+                       title: str = "Kata Kunci tiap Topic",
                        width: int = 250,
                        height: int = 250) -> go.Figure:
     """ Visualize a barchart of selected topics
@@ -41,7 +41,7 @@ def visualize_barchart(topic_model,
     <iframe src="../../getting_started/visualization/bar_chart.html"
     style="width:1100px; height: 660px; border: 0px;""></iframe>
     """
-    colors = itertools.cycle(["#D55E00", "#0072B2", "#CC79A7", "#E69F00", "#56B4E9", "#009E73", "#F0E442"])
+    colors = itertools.cycle(['#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', '#19D3F3', '#FF6692', '#B6E880', '#FF97FF', '#FECB52'])
 
     # Select topics based on top_n and topics args
     freq_df = topic_model.get_topic_freq()
@@ -94,7 +94,6 @@ def visualize_barchart(topic_model,
         showlegend=False,
         title={
             'text': f"<b>{title}",
-            'x': .5,
             'xanchor': 'center',
             'yanchor': 'top',
             'font': dict(
@@ -108,6 +107,7 @@ def visualize_barchart(topic_model,
             font_size=16,
             font_family="Rockwell"
         ),
+        margin=dict(l=40, r=40)
     )
 
     fig.update_xaxes(showgrid=True)

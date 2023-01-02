@@ -47,6 +47,11 @@ def get_sentiment(df):
     # Sentiment Analysis
     classifier = pipeline("sentiment-analysis",model = "indobert")
     df['sentiment'] = df['content'].apply(lambda x: classifier(x)[0]['label'])
+    # change order sentiment to first column
+    cols = df.columns.tolist()
+    cols = cols[-1:] + cols[:-1]
+    df = df[cols]
+
     return df
 
 def get_bar_chart(df):
