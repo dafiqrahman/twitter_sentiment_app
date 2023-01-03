@@ -9,7 +9,7 @@ import script.text_proc as tp
 
 # Load data
 # add tiwtter logo inside title 
-st.markdown("<h1 style='text-align: center; color: black;'>🗨️Twitter Sentiment Analysis App</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>🗨️Twitter Sentiment Analysis App</h1>", unsafe_allow_html=True)
 st.write("Aplikasi sederhana untuk melakukan analisis sentimen terhadap tweet yang diinputkan dan mengekstrak topik dari setiap sentimen")
 
 # streamlit selectbox simple and advanced
@@ -86,33 +86,39 @@ if submit:
     embedding_model = load_sentence_model()
     tab4,tab5,tab6 = st.tabs(["Negatif","Netral","Positif"])
     with tab4:
-        if len(df[df["sentiment"]=="negatif"]) < 5:
+        if len(df[df["sentiment"]=="negatif"]) < 11:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
+            st.write(df[df["sentiment"]=="negatif"])
         else:
             with st.spinner('Sedang Membuat Grafik...'):
                 text,data,fig = tp.plot_text(df,"negatif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-            fig,topic_modelling = tp.topic_modelling(text,data)
-            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+            with st.spinner('Sedang Mengekstrak Topik... (2/2)'):
+                fig,topic_modelling = tp.topic_modelling(text,data)
+                st.plotly_chart(fig,use_container_width=True,theme="streamlit")
     with tab5:
-        if len(df[df["sentiment"]=="netral"]) < 5:
+        if len(df[df["sentiment"]=="netral"]) < 11:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
+            st.write(df[df["sentiment"]=="netral"])
         else:
-            with st.spinner('Sedang Membuat Grafik...'):
+            with st.spinner('Sedang Membuat Grafik... (1/2)'):
                 text,data,fig = tp.plot_text(df,"netral",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-            fig,topic_modelling = tp.topic_modelling(text,data)
-            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+            with st.spinner('Sedang Mengekstrak Topik... (2/2)'):
+                fig,topic_modelling = tp.topic_modelling(text,data)
+                st.plotly_chart(fig,use_container_width=True,theme="streamlit")
     with tab6:
-        if len(df[df["sentiment"]=="positif"]) < 5:
+        if len(df[df["sentiment"]=="positif"]) < 11:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
+            st.write(df[df["sentiment"]=="positif"])
         else:
             with st.spinner('Sedang Membuat Grafik...'):
                 text,data,fig = tp.plot_text(df,"positif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
-            fig,topic_modelling = tp.topic_modelling(text,data)
-            st.plotly_chart(fig,use_container_width=True,theme="streamlit")
-    
+            with st.spinner('Sedang Mengekstrak Topik... (2/2)'):
+                fig,topic_modelling = tp.topic_modelling(text,data)
+                st.plotly_chart(fig,use_container_width=True,theme="streamlit")
+        
             
     
 

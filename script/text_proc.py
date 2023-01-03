@@ -49,6 +49,8 @@ def plot_text(df,kelas,embedding_model):
     clusterer.fit(umap_data)
 
     labels = ['cluster ' + str(i) for i in clusterer.labels_]
+    # replace cluster -1 with outlier 
+    labels = ["outlier" if i == "cluster -1" else i for i in labels ]
     text = df["content"].str.wrap(50).apply(lambda x: x.replace('\n', '<br>'))
     
     fig = px.scatter(x=umap_data[:,0], y=umap_data[:,1],color = clusterer.labels_)
@@ -71,15 +73,16 @@ def plot_text(df,kelas,embedding_model):
     # set legend title to cluster
     return df["content"],data,fig
 
-def topic_modelling(df,embed_df,nr_topics = 10):
+def topic_modelling(df,embed_df):
     data = df.apply(lambda x: ' '.join([w for w in x.split() if len(w)>3]))
     stopwords = load_stopwords()
     # remove empty data 
     topic_model = BERTopic(
         calculate_probabilities=True,
+        # cluster model 
+        hdbscan_model = hdbscan.HDBSCAN(min_cluster_size=5,prediction_data=True),
         vectorizer_model=CountVectorizer(stop_words=stopwords),
         language="indonesian",
-        nr_topics=nr_topics,
     )
     topics, probs = topic_model.fit_transform(data,embed_df)
     topic_labels = topic_model.generate_topic_labels(
