@@ -10,8 +10,7 @@ import script.text_proc as tp
 # Load data
 # add tiwtter logo inside title 
 st.markdown("<h1 style='text-align: center;'>🗨️Twitter Sentiment Analysis App</h1>", unsafe_allow_html=True)
-st.write("Aplikasi sederhana untuk melakukan analisis sentimen terhadap tweet yang diinputkan dan mengekstrak topik dari setiap sentimen")
-
+st.write("Aplikasi sederhana untuk melakukan analisis sentimen terhadap tweet yang diinputkan dan mengekstrak topik dari setiap sentimen.")
 # streamlit selectbox simple and advanced
 
 sb1,sb2 = st.columns([1,4])
@@ -28,7 +27,7 @@ if option == 'Simple':
 else :
     col1, col2 = st.columns([3,1])
     with col1:
-        input = st.text_input("Masukkan Parameter Pencarian", "(@undipmenfess AND @BPJSKesehatanRI) -filter:links filter:replies")
+        input = st.text_input("Masukkan Parameter Pencarian", "(@undipmenfess AND @BPJSKesehatanRI) -filter:links filter:replies lang:id")
     with col2:
         length = st.number_input("Jumlah Tweet", 10, 500, 100)
     st.caption("anda bisa menggunakan parameter pencarian yang lebih spesifik, parameter ini sama dengan paremeter pencarian di twitter")
@@ -38,6 +37,7 @@ submit = st.button("🔍Cari Tweet")
 st.caption("semakin banyak tweet yang diambil maka semakin lama proses analisis sentimen")
 
 if submit:
+    # df = pd.read_csv("assets/data.csv")
     with st.spinner('Mengambil data dari twitter... (1/2)'):
         df = fn.get_tweets(input, length, option)
     with st.spinner('Melakukan Prediksi Sentimen... (2/2)'):
@@ -81,7 +81,7 @@ if submit:
     st.write("<h3>✨ Sentiment Clustering</h3>",unsafe_allow_html=True)
     @st.experimental_singleton
     def load_sentence_model():
-        embedding_model = SentenceTransformer("sentence_bert")
+        embedding_model = SentenceTransformer("firqaaa/indo-sentence-bert-base")
         return embedding_model
     embedding_model = load_sentence_model()
     tab4,tab5,tab6 = st.tabs(["Negatif","Netral","Positif"])
@@ -90,7 +90,7 @@ if submit:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
             st.write(df[df["sentiment"]=="negatif"])
         else:
-            with st.spinner('Sedang Membuat Grafik...'):
+            with st.spinner('Sedang Membuat Grafik...(1/2)'):
                 text,data,fig = tp.plot_text(df,"negatif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
             with st.spinner('Sedang Mengekstrak Topik... (2/2)'):
@@ -112,7 +112,7 @@ if submit:
             st.write("Tweet Terlalu Sedikit, Tidak dapat melakukan clustering")
             st.write(df[df["sentiment"]=="positif"])
         else:
-            with st.spinner('Sedang Membuat Grafik...'):
+            with st.spinner('Sedang Membuat Grafik...(1/2)'):
                 text,data,fig = tp.plot_text(df,"positif",embedding_model)
                 st.plotly_chart(fig,use_container_width=True,theme=None)
             with st.spinner('Sedang Mengekstrak Topik... (2/2)'):

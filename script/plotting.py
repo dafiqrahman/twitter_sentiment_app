@@ -59,7 +59,7 @@ def visualize_barchart(topic_model,
         subplot_titles = [topic_model.custom_labels_[topic + topic_model._outliers] for topic in topics]
     else:
         subplot_titles = [f"Topic {topic}" for topic in topics]
-    columns = 4
+    columns = 3
     rows = int(np.ceil(len(topics) / columns))
     fig = make_subplots(rows=rows,
                         cols=columns,
@@ -100,11 +100,11 @@ def visualize_barchart(topic_model,
                 size=22,
                 color="Black")
         },
-        width=width*4,
+        width=width*3,
         height=height*rows if rows > 1 else height * 1.3,
         hoverlabel=dict(
             bgcolor="white",
-            font_size=16,
+            font_size=13,
             font_family="Rockwell"
         ),
         margin=dict(l=40, r=40)

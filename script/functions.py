@@ -10,7 +10,7 @@ from sentence_transformers import SentenceTransformer
 
 def get_tweets(username, length=10, option = None):
     # Creating list to append tweet data to
-    query = "("+username + ")"+"(to:"+username+") -filter:links filter:replies"
+    query = "("+username + ")"+"(to:"+username+") -filter:links filter:replies lang:id"
     if option == "Advanced":
         query = username
     tweets = []

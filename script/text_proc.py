@@ -45,7 +45,7 @@ def plot_text(df,kelas,embedding_model):
     data = embedding_model.encode(df.values.tolist())
     umap_model = umap.UMAP(n_neighbors=min(df.shape[0],5),random_state = 42) 
     umap_data = umap_model.fit_transform(data)
-    clusterer = hdbscan.HDBSCAN(min_cluster_size=2)
+    clusterer = hdbscan.HDBSCAN(min_cluster_size=round((df.shape[0])**(0.5)-1),min_samples=3)
     clusterer.fit(umap_data)
 
     labels = ['cluster ' + str(i) for i in clusterer.labels_]
