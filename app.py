@@ -79,11 +79,8 @@ if submit:
             plt.axis("off")
             st.pyplot(fig)
     st.write("<h3>✨ Sentiment Clustering</h3>",unsafe_allow_html=True)
-    @st.experimental_singleton
-    def load_sentence_model():
-        embedding_model = SentenceTransformer("firqaaa/indo-sentence-bert-base")
-        return embedding_model
-    embedding_model = load_sentence_model()
+    # @st.experimental_singleton
+    # embedding_model = load_sentence_model()
     tab4,tab5,tab6 = st.tabs(["Negatif","Netral","Positif"])
     with tab4:
         if len(df[df["sentiment"]=="negatif"]) < 11:

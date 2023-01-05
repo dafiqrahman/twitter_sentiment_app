@@ -3,10 +3,11 @@ import numpy as np
 import re
 import snscrape.modules.twitter as sntwitter
 from transformers import pipeline
-import plotly.express as px
-from sentence_transformers import SentenceTransformer
+import plotly.express as px 
 
-
+def load_sentence_model():
+    embedding_model = pipeline(task = "feature-extraction", model = "indobert")
+    return embedding_model
 
 def get_tweets(username, length=10, option = None):
     # Creating list to append tweet data to
