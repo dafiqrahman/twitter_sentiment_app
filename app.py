@@ -3,9 +3,9 @@ import pandas as pd
 import script.functions as fn
 import plotly.express as px
 import matplotlib.pyplot as plt
-from sentence_transformers import SentenceTransformer
 # import text_proc in script folder
 import script.text_proc as tp
+from sentence_transformers import SentenceTransformer
 
 # Load data
 # add tiwtter logo inside title 
@@ -79,8 +79,11 @@ if submit:
             plt.axis("off")
             st.pyplot(fig)
     st.write("<h3>✨ Sentiment Clustering</h3>",unsafe_allow_html=True)
-    # @st.experimental_singleton
-    # embedding_model = load_sentence_model()
+    @st.experimental_singleton
+    def load_sentence_model():
+        embedding_model = SentenceTransformer('sentence_bert')
+        return embedding_model
+    embedding_model = load_sentence_model()
     tab4,tab5,tab6 = st.tabs(["Negatif","Netral","Positif"])
     with tab4:
         if len(df[df["sentiment"]=="negatif"]) < 11:
