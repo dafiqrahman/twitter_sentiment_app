@@ -18,6 +18,11 @@ Pada aplikasi ini saya menggunakan 2 metode utama, yakni text classification dan
 
 Demo aplikasi : https://huggingface.co/spaces/dafqi/indo_twitter_sentiment_app 
 
+library yang digunakan:  <br>
+modelling : transformers, bertopic, scikit-learn <br>
+visualisasi : plotly, wordcloud <br>
+deployment : streamlit <br>
+
 ## bias dan limitasi
 
 Menurut saya model untuk sentimen analisis lebih baik dikhususkan untuk domain tertentu, dengan kata lain jika ingin menganalisis di bidang finance, maka gunakan model yang memang dilatih pada data yang berisi tweet finance dengan begitu model akan lebih representatif. Pada aplikasi ini model klasifikasi dilatih menggunakan data dengan domain yang lebih umum, seperti review aplikasi dan juga komentar tentang event tertentu. Oleh karena itu, jika topik yang dibahas diluar itu, mungkin saja hasilnya kurang representatif. <br>
