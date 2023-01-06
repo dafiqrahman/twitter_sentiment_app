@@ -20,7 +20,7 @@ Demo aplikasi : https://huggingface.co/spaces/dafqi/indo_twitter_sentiment_app
 
 ## bias dan limitasi
 
-Menurut saya model untuk sentimen analisis lebih baik dikhususkan untuk domain tertentu, dengan kata lain jika ingin menganalisis di bidang finance, maka gunakan model yang memang dilatih pada data yang berisi tweet finance dengan begitu model akan lebih representatif. Pada aplikasi ini model klasifikasi dilatih menggunakan data dengan domain yang lebih umum, seperti review aplikasi dan juga komentar tentang event tertentu. Oleh karena itu, jika topik yang dibahas diluar itu, mungkin saja hasilnya kurang representatif. 
+Menurut saya model untuk sentimen analisis lebih baik dikhususkan untuk domain tertentu, dengan kata lain jika ingin menganalisis di bidang finance, maka gunakan model yang memang dilatih pada data yang berisi tweet finance dengan begitu model akan lebih representatif. Pada aplikasi ini model klasifikasi dilatih menggunakan data dengan domain yang lebih umum, seperti review aplikasi dan juga komentar tentang event tertentu. Oleh karena itu, jika topik yang dibahas diluar itu, mungkin saja hasilnya kurang representatif. <br>
 Keterbatasan dari aplikasi ini adalah hanya bisa melakukan analisis tweet yang berbahasa indonesia, hal ini dikarenakan keterbatasan storage yang digunakan untuk menyimpan model dan juga dataset yang diperoleh belum mencakup bahasa selain indonesia.  
 
 ## Text Classification
