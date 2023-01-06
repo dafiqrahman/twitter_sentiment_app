@@ -37,4 +37,8 @@ Algoritma : Bertopic <br>
 Sentence_transformers model : indobert-sentence-transformers <br>
 Model lainnya menggunakan default model pada bertopic
 
+## Preview Aplikasi
+
+<img src="assets/img/showcase_1.png" /> <br>
+<img src="assets/img/showcase_2.png" /> <br>
 
