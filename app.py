@@ -21,13 +21,13 @@ if option == 'Simple':
 # create col1 and col2
     col1, col2 = st.columns([3,2])
     with col1:
-        input = st.text_input("Masukkan User/Hastag", "@BPJSKesehatanRI")
+        input = st.text_input("Masukkan User/Hastag", "@traveloka")
     with col2:
         length = st.number_input("Jumlah Tweet", 10, 500, 100)
 else :
     col1, col2 = st.columns([3,1])
     with col1:
-        input = st.text_input("Masukkan Parameter Pencarian", "(@undipmenfess AND @BPJSKesehatanRI) -filter:links filter:replies lang:id")
+        input = st.text_input("Masukkan Parameter Pencarian", "(to:@traveloka AND @traveloka) -filter:links filter:replies lang:id")
     with col2:
         length = st.number_input("Jumlah Tweet", 10, 500, 100)
     st.caption("anda bisa menggunakan parameter pencarian yang lebih spesifik, parameter ini sama dengan paremeter pencarian di twitter")
@@ -51,6 +51,7 @@ if submit:
     
 
     st.write("<h3>📊 Analisis Sentimen</h3>",unsafe_allow_html=True)
+    st.caption("double tap untuk mereset grafik")
     col_fig1, col_fig2 = st.columns([4,3])
     with col_fig1:
          with st.spinner('Sedang Membuat Grafik...'):
@@ -79,6 +80,7 @@ if submit:
             plt.axis("off")
             st.pyplot(fig)
     st.write("<h3>✨ Sentiment Clustering</h3>",unsafe_allow_html=True)
+    st.caption("double tap untuk mereset grafik")
     @st.experimental_singleton
     def load_sentence_model():
         embedding_model = SentenceTransformer('sentence_bert')
