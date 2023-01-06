@@ -25,16 +25,15 @@ Keterbatasan dari aplikasi ini adalah hanya bisa melakukan analisis tweet yang b
 
 ## Text Classification
 
-Model yang digunakan : Indobert-lite-base-p1
-Dataset yang digunakan : data tweet IndoNLU  SMSA 
-Model benchmark : 
-Gambar benchmar dari indoNLU
+Model yang digunakan : Indobert-lite-base-p1 <br>
+Dataset yang digunakan : data tweet IndoNLU  SMSA <br> 
+Model benchmark :  <br>
 Detail mengenai proses training dan pembuatan model ada pada notebook/text_classification.ipynb   
 
 ## Topic Modelling 
 
-Algoritma : Bertopic
-Sentence_transformers model : indobert-sentence-transformers
+Algoritma : Bertopic <br>
+Sentence_transformers model : indobert-sentence-transformers <br>
 Model lainnya menggunakan default model pada bertopic
 
 
